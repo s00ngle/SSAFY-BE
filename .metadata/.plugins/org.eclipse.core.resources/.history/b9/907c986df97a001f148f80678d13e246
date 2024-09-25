@@ -1,0 +1,140 @@
+package com.ssafy.ws.step2.dao;
+
+import com.ssafy.ws.step2.dto.Movie;
+import com.ssafy.ws.step2.util.DBUtil;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MovieDaoImpl implements MovieDao {
+
+	private static final String INSERT_MOVIE_SQL = "INSERT INTO movies (Title, Director, Genre, RunnintTime) VALUES (?, ?, ?, ?)";
+	private static final String SELECT_ALL_MOVIES_SQL = "SELECT * FROM movies";
+	private static final String SELECT_MOVIE_BY_ID_SQL = "SELECT * FROM movies WHERE Id = ?";
+	private static final String UPDATE_MOVIE_SQL = "UPDATE movies SET Title = ?, director = ?, Genre = ?, RunnintTime = ? WHERE Id = ?";
+	private static final String DELETE_MOVIE_SQL = "DELETE FROM movies WHERE Id = ?";
+
+	@Override
+	public void addMovie(Movie movie) throws Exception {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			connection = DBUtil.getConnection();
+			preparedStatement = connection.prepareStatement(INSERT_MOVIE_SQL);
+			preparedStatement.setString(1, movie.getTitle());
+			preparedStatement.setString(2, movie.getDirector());
+			preparedStatement.setString(3, movie.getGenre());
+			preparedStatement.setInt(4, movie.getRunningTime());
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(preparedStatement, connection);
+		}
+	}
+
+	@Override
+	public List<Movie> getAllMovies() throws Exception {
+		List<Movie> movies = new ArrayList<>();
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = DBUtil.getConnection();
+			preparedStatement = connection.prepareStatement(SELECT_ALL_MOVIES_SQL);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Movie movie = new Movie();
+				movie.setId(resultSet.getInt("id"));
+				movie.setTitle(resultSet.getString("title"));
+				movie.setDirector(resultSet.getString("director"));
+				movie.setGenre(resultSet.getString("genre"));
+				movie.setRunningTime(Integer.parseInt(resultSet.getString("running_time")));
+				movies.add(movie);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(resultSet, preparedStatement, connection);
+		}
+
+		return movies;
+	}
+
+	@Override
+	public Movie getMovieById(int id) throws Exception {
+		Movie movie = null;
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = DBUtil.getConnection();
+			preparedStatement = connection.prepareStatement(SELECT_MOVIE_BY_ID_SQL);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				movie = new Movie();
+				movie.setId(resultSet.getInt("id"));
+				movie.setTitle(resultSet.getString("title"));
+				movie.setDirector(resultSet.getString("director"));
+				movie.setGenre(resultSet.getString("genre"));
+				movie.setRunningTime(Integer.parseInt(resultSet.getString("running_time")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(resultSet, preparedStatement, connection);
+		}
+
+		return movie;
+	}
+
+	@Override
+	public void updateMovie(Movie movie) throws Exception {
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			connection = DBUtil.getConnection();
+			preparedStatement = connection.prepareStatement(UPDATE_MOVIE_SQL);
+
+			preparedStatement.setString(1, movie.getTitle());
+			preparedStatement.setString(2, movie.getDirector());
+			preparedStatement.setString(3, movie.getGenre());
+			preparedStatement.setInt(4, movie.getRunningTime());
+			preparedStatement.setInt(5, movie.getId());
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(preparedStatement, connection);
+		}
+	}
+
+	@Override
+	public void deleteMovie(int id) throws Exception {
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			connection = DBUtil.getConnection();
+			preparedStatement = connection.prepareStatement(DELETE_MOVIE_SQL);
+			preparedStatement.setInt(1, id);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(preparedStatement, connection);
+		}
+	}
+}

@@ -1,0 +1,50 @@
+<%@page import="com.ssafy.ws.step2.dto.Movie"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+
+<%
+	String root = request.getContextPath();
+
+	List<Movie> list = (List<Movie>) request.getAttribute("movies");
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>영화 목록</title>
+</head>
+<body>
+    <h1>영화 목록</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>영화 ID</th>
+                <th>제목</th>
+                <th>감독</th>
+                <th>장르</th>
+                <th>러닝 타임</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (list != null && !list.isEmpty()) { %>
+                <% for (Movie movie : list) { %>
+                    <tr>
+                        <td><%= movie.getId() %></td>
+                        <td><%= movie.getTitle() %></td>
+                        <td><%= movie.getDirector() %></td>
+                        <td><%= movie.getGenre() %></td>
+                        <td><%= movie.getRunningTime() %> 분</td>
+                    </tr>
+                <% } %>
+            <% } else { %>
+                <tr>
+                    <td colspan="5">등록된 영화가 없습니다.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <a href="<%= root %>/regist.jsp">영화 등록하기</a>
+</body>
+</html>

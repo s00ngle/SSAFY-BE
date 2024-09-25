@@ -1,0 +1,11 @@
+package com.ssafy.ws.step2.dao;
+
+import java.util.List;
+
+import com.ssafy.ws.step2.dto.Movie;
+
+public interface MovieDao {
+	void addMovie(Movie movie) throws Exception;
+	List<Movie> getAllMovies() throws Exception;
+	Movie getMovieById(int id) throws Exception;
+}

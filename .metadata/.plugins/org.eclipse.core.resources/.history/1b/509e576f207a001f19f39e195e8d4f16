@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FirstScope</title>
+</head>
+<body>
+	<%
+		pageContext.setAttribute("name", "page kim");
+		request.setAttribute("name", "request kim");
+		session.setAttribute("name", "session kim");
+		application.setAttribute("name", "application kim");
+		
+	%>
+</body>
+</html>

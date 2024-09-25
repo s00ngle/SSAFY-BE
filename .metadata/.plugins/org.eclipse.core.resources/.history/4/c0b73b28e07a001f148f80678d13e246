@@ -1,0 +1,70 @@
+package com.ssafy.board.conroller;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/article")
+public class BoardController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String act = request.getParameter("act");
+		System.out.println("act =====> " + act);
+
+		String path = "";
+		if ("list".equals(act)) {
+			// 글 목록으로 이동
+			path = "/board/list.jsp";
+			forward(request, response, path);
+		} else if ("write".equals(act)) {
+			// 글쓰기 페이지로 이동
+			path = "/board/write.jsp";
+			forward(request, response, path);
+		} else {
+			// 기본적으로 글 목록으로 이동
+			path = "/board/list.jsp";
+			forward(request, response, path);
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+	private void forward(HttpServletRequest request, HttpServletResponse response, String path)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+		dispatcher.forward(request, response);
+	}
+
+	private void redirect(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
+		response.sendRedirect(request.getContextPath() + path);
+	}
+
+	private String mvModify(HttpServletRequest request, HttpServletResponse response) {
+		// TODO : 수정할 글 번호를 받아서 해당 글 정보를 수정 페이지로 전달
+		String articleNo = request.getParameter("articleNo");
+		// TODO : articleNo로 서비스에서 글 정보를 조회하는 로직 추가
+		request.setAttribute("article", articleNo);  // 예시로 글 번호를 넘기지만, 글 정보가 필요함
+		return "/board/modify.jsp";
+	}
+
+	private String modify(HttpServletRequest request, HttpServletResponse response) {
+		// TODO : 수정할 글 정보를 받아 처리
+		String articleNo = request.getParameter("articleNo");
+		// TODO : 수정된 글 정보를 서비스에서 처리하는 로직 추가
+		return "/main?act=view&articleNo=" + articleNo;
+	}
+
+	private String delete(HttpServletRequest request, HttpServletResponse response) {
+		// TODO : 삭제할 글 번호를 받아서 삭제 처리
+		String articleNo = request.getParameter("articleNo");
+		// TODO : 서비스에서 삭제 처리 로직 추가
+		return "/main?act=list";
+	}
+}

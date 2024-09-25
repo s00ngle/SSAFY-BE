@@ -1,0 +1,30 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <title>영화 등록 결과</title>
+</head>
+<body>
+    <h1>영화 등록 결과</h1>
+    <table border="1">
+        <tr>
+            <th>제목</th>
+            <td><%= ((Movie) request.getAttribute("movie")).getTitle() %></td>
+        </tr>
+        <tr>
+            <th>감독</th>
+            <td><%= ((Movie) request.getAttribute("movie")).getDirector() %></td>
+        </tr>
+        <tr>
+            <th>장르</th>
+            <td><%= ((Movie) request.getAttribute("movie")).getGenre() %></td>
+        </tr>
+        <tr>
+            <th>상영 시간</th>
+            <td><%= ((Movie) request.getAttribute("movie")).getRunningTime() %> 분</td>
+        </tr>
+    </table>
+    <br>
+    <a href="/">홈으로 이동</a><br>
+    <a href="/regist.html">영화 등록</a>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<%@page import="com.ssafy.ws.step2.dto.Movie"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+
+<%
+	String root = request.getContextPath();
+
+	List<Movie> list = (List<Movie>) request.getAttribute("movies");
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>영화 등록 결과</title>
+</head>
+<body>
+
+</body>
+</html>

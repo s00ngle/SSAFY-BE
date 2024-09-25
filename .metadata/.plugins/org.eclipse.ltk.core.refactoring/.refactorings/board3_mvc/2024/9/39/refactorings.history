@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.ssafy.board.conroller&apos; to &apos;com.ssafy.board.controller&apos;&#x0D;&#x0A;- Original project: &apos;board3_mvc&apos;&#x0D;&#x0A;- Original element: &apos;board3_mvc/src/main/java/com.ssafy.board.conroller&apos;&#x0D;&#x0A;- Renamed element: &apos;board3_mvc/src/main/java/com.ssafy.board.controller&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.ssafy.board.conroller&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.ssafy.board.conroller" name="com.ssafy.board.controller" qualified="false" references="true" stamp="1727230057996" textual="false" version="1.0"/>
+</session>

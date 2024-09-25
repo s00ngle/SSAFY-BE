@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>영화 등록 결과</title>
+</head>
+<body>
+    <h1>영화 등록 결과</h1>
+    <table border="1">
+        <tr>
+            <th>제목</th>
+            <td><%= request.getAttribute("title") %></td>
+        </tr>
+        <tr>
+            <th>감독</th>
+            <td><%= request.getAttribute("director") %></td>
+        </tr>
+        <tr>
+            <th>장르</th>
+            <td><%= request.getAttribute("genre") %></td>
+        </tr>
+        <tr>
+            <th>상영 시간</th>
+            <td><%= request.getAttribute("runningTime") %> 분</td>
+        </tr>
+    </table>
+    <br>
+    <a href="/">홈으로 이동</a><br>
+    <a href="/regist.html">추가 등록</a>
+</body>
+</html>

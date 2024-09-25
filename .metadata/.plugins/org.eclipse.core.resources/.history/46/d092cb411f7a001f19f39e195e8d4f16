@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" errorPage="error.jsp" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>구구단</title>
+    <!-- 스타일 생략 -->
+</head>
+<body>
+    <h1>Hello SSAFY</h1>
+    <h3>안녕 싸피!!!</h3>
+
+    <h5>
+        <%
+            String name = "김용순";
+            out.println(name + "님 안녕하세요.");
+        %>
+    </h5>
+
+    <a href="/basic_jsp/index.jsp">홈으로</a></br>
+
+    <table>
+        <%
+            // 예외 발생 가능 코드
+            for (int j = 1; j < 10; j++) {
+                out.println("<tr>");
+                for (int i = 2; i < 10; i++) {
+                    out.println("<td>" + i + " * " + j + " = " + (i * j) + "</td>");
+                }
+                out.println("</tr>");
+            }
+        %>
+    </table>
+</body>
+</html>

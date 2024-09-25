@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영화 정보 입력</title>
+    <style>
+        fieldset {
+            width: 400px;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            width: 80px;
+        }
+        .input-group input {
+            flex: 1;
+            margin-right: 100px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 10px;
+        }
+        .button-group button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/main" method="post">
+        <fieldset>
+            <legend>영화 정보 입력</legend>
+
+            <div class="input-group">
+                <label for="title">제목</label>
+                <input type="text" name="title" required />
+            </div>
+
+            <div class="input-group">
+                <label for="director">감독</label>
+                <input type="text" name="director" required />
+            </div>
+
+            <div class="input-group">
+                <label for="genre">장르</label>
+                <input type="text" name="genre" required />
+            </div>
+
+            <div class="input-group">
+                <label for="running-time">상영 시간</label>
+                <input type="text" name="running-time" required />
+            </div>
+	        <input type="hidden" name="action" value="regist"/>
+	        <div class="button-group">
+	            <button type="submit">등록</button>
+	            <button type="reset">초기화</button>
+	        </div>
+        </fieldset>
+    </form>
+</body>
+</html>
