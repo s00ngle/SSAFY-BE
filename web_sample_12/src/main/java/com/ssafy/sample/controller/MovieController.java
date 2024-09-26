@@ -31,20 +31,26 @@ public class MovieController extends HttpServlet {
 	private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String act = request.getParameter("act");
 		
-		if ("list".equals(act)) {
-			doList(request, response);
-		} else if ("create-form".equals(act)) {
-			forward(request, response, "/movie/regist.jsp");
-		} else if ("create".equals(act)) {
-			doCreate(request, response);
-		} else if ("detail".equals(act)) {
-			doDetail(request, response);
-		} else if ("update-form".equals(act)) {
-			dpUpdateForm(request, response);
-		} else if ("update".equals(act)) {
-			doUpdate(request, response);
-		} else {
-			doMain(request, response);
+		try {
+			if ("list".equals(act)) {
+				doList(request, response);
+			} else if ("create-form".equals(act)) {
+				forward(request, response, "/movie/regist.jsp");
+			} else if ("create".equals(act)) {
+				doCreate(request, response);
+			} else if ("detail".equals(act)) {
+				doDetail(request, response);
+			} else if ("update-form".equals(act)) {
+				dpUpdateForm(request, response);
+			} else if ("update".equals(act)) {
+				doUpdate(request, response);
+			} else {
+				doMain(request, response);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("errorMsg", e.getMessage());
+			forward(request, response, "/movie/error.jsp");
 		}
 	}
 
