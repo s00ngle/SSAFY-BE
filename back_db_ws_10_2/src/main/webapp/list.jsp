@@ -5,7 +5,9 @@
 <%
 String root = request.getContextPath();
 List<Movie> list = (List<Movie>) request.getAttribute("movies");
-int cnt = (int) request.getAttribute("cnt");
+//int cnt = (int) request.getAttribute("cnt");
+
+Integer cnt = (Integer) request.getSession().getAttribute("movieCount");
 %>
 
 <!DOCTYPE html>

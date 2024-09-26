@@ -1,3 +1,4 @@
+<%@page import="com.ssafy.ws.step2.dto.Movie"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -91,21 +92,22 @@
         <h1>영화 등록 결과</h1>
         <h3>등록된 영화 정보</h3>
         <table>
+        	<% Movie movie = (Movie) request.getAttribute("movie"); %>
             <tr>
                 <th>제목</th>
-                <td><%= request.getAttribute("title") %></td>
+                <td><%= movie.getTitle() %></td>
             </tr>
             <tr>
                 <th>감독</th>
-                <td><%= request.getAttribute("director") %></td>
+                <td><%= movie.getDirector() %></td>
             </tr>
             <tr>
                 <th>장르</th>
-                <td><%= request.getAttribute("genre") %></td>
+                <td><%= movie.getGenre() %></td>
             </tr>
             <tr>
                 <th>상영 시간</th>
-                <td><%= request.getAttribute("running-time") %> 분</td>
+                <td><%= movie.getRunningTime() %> 분</td>
             </tr>
         </table>
         <div class="button-container">

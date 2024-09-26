@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.RequestDispatcher;
 
 @WebServlet("/main")
@@ -74,10 +75,19 @@ public class MainServlet extends HttpServlet {
         	
         	Movie movie = new Movie(0, title, director, genre, runningTime);
 			MovieDaoImpl.getInstance().insertMovie(movie);
-			request.setAttribute("title", request.getParameter("title"));
-	    	request.setAttribute("director", request.getParameter("director"));
-	    	request.setAttribute("genre", request.getParameter("genre"));
-	    	request.setAttribute("running-time", request.getParameter("running-time"));
+			
+	    	request.setAttribute("movie", movie);
+	    	
+	    	// ---------------- movieCount Session 방식 ------------------------
+	    	HttpSession session = request.getSession();
+            Integer movieCount = (Integer) session.getAttribute("movieCount");
+            if (movieCount == null) {
+                movieCount = 0;
+            }
+            movieCount++;
+            session.setAttribute("movieCount", movieCount);
+            // -----------------------------------------------------------------
+	    	
 	    	return "/regist_result.jsp";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,8 +100,9 @@ public class MainServlet extends HttpServlet {
 			List<Movie> movies = MovieDaoImpl.getInstance().selectAllMovies();
 			request.setAttribute("movies", movies);
 			
-			int cnt = MovieDaoImpl.getInstance().movieCount();
-			request.setAttribute("cnt", cnt);
+//			int cnt = MovieDaoImpl.getInstance().movieCount();
+//			request.setAttribute("cnt", cnt);
+			
 			return "/list.jsp";
 		} catch (Exception e) {
 			e.printStackTrace();

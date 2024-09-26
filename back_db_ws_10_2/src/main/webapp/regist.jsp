@@ -106,7 +106,7 @@
 
             <div class="input-group">
                 <label for="running-time">상영 시간</label>
-                <input type="text" name="running-time" required />
+                <input type="number" name="running-time" required />
             </div>
 
             <!-- 
