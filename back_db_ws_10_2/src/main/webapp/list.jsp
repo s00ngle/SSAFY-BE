@@ -1,14 +1,8 @@
-<%@page import="com.ssafy.ws.step2.dto.Movie"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
-<%
-String root = request.getContextPath();
-List<Movie> list = (List<Movie>) request.getAttribute("movies");
-//int cnt = (int) request.getAttribute("cnt");
-
-Integer cnt = (Integer) request.getSession().getAttribute("movieCount");
-%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
+<c:set var="cnt" value="${sessionScope.movieCount}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -109,7 +103,7 @@ footer {
 <body>
 	<div class="container">
 		<h1>영화 목록</h1>
-		<h3>등록된 영화 수 : <%= cnt %></h3>
+		<h3>등록된 영화 수 : ${cnt}</h3>
 		<div class="table-container">
 			<table>
 				<thead>
@@ -121,34 +115,25 @@ footer {
 					</tr>
 				</thead>
 				<tbody>
-					<%
-					if (list != null && !list.isEmpty()) {
-					%>
-					<%
-					for (Movie movie : list) {
-					%>
-					<tr>
-						<td><%=movie.getTitle()%></td>
-						<td><%=movie.getDirector()%></td>
-						<td><%=movie.getGenre()%></td>
-						<td><%=movie.getRunningTime()%> 분</td>
-					</tr>
-					<%
-					}
-					%>
-					<%
-					} else {
-					%>
-					<tr>
-						<td colspan="5" style="text-align: center;">등록된 영화가 없습니다.</td>
-					</tr>
-					<%
-					}
-					%>
+					<c:if test="${movies ne null}">
+						<c:forEach var="movie" items="${movies}">
+							<tr>
+								<td>${movie.title}</td>
+								<td>${movie.director}</td>
+								<td>${movie.genre}</td>
+								<td>${movie.runningTime} 분</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+					<c:if test="${movies eq null}">
+						<tr>
+							<td colspan="5" style="text-align: center;">등록된 영화가 없습니다.</td>
+						</tr>
+					</c:if>
 				</tbody>
 			</table>
 		</div>
-		<a href="<%=root%>/main?act=mvregist">영화 등록하기</a>
+		<a href="${root}/main?act=mvregist">영화 등록하기</a>
 		<footer> &copy; SSAFY </footer>
 	</div>
 </body>

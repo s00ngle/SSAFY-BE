@@ -1,10 +1,8 @@
-<%@page import="com.ssafy.ws.step2.dto.Movie"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%
-	String root = request.getContextPath();
-%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html>
@@ -92,28 +90,27 @@
         <h1>영화 등록 결과</h1>
         <h3>등록된 영화 정보</h3>
         <table>
-        	<% Movie movie = (Movie) request.getAttribute("movie"); %>
             <tr>
                 <th>제목</th>
-                <td><%= movie.getTitle() %></td>
+                <td>${movie.title}</td>
             </tr>
             <tr>
                 <th>감독</th>
-                <td><%= movie.getDirector() %></td>
+                <td>${movie.director}</td>
             </tr>
             <tr>
                 <th>장르</th>
-                <td><%= movie.getGenre() %></td>
+                <td>${movie.genre}</td>
             </tr>
             <tr>
                 <th>상영 시간</th>
-                <td><%= movie.getRunningTime() %> 분</td>
+                <td>${movie.runningTime} 분</td>
             </tr>
         </table>
         <div class="button-container">
-            <a href="<%= root %>/main">홈으로 이동</a>
-            <a href="<%= root %>/main?act=mvregist">추가 등록</a>
-            <a href="<%= root %>/main?act=list">영화 목록</a>
+            <a href="${root}/main">홈으로 이동</a>
+            <a href="${root}/main?act=mvregist">추가 등록</a>
+            <a href="${root}/main?act=list">영화 목록</a>
         </div>
     </div>
 </body>

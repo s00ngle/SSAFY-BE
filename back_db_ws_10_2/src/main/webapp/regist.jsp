@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -109,9 +110,7 @@
                 <input type="number" name="running-time" required />
             </div>
 
-            <!-- 
-             <input type="hidden" name="act" value="regist"/>            
-             -->
+             <input type="hidden" name="act" value="regist"/>
             
             <div class="button-group">
                 <button type="submit">등록</button>

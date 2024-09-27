@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<%
-	String root = request.getContextPath();
-%>
+
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -59,7 +59,7 @@
 <body>
     <div class="container">
         <h1>영화관리 Servlet</h1>
-        <a href="<%= root %>/main?act=mvregist">영화 등록</a>
+        <a href="${root}/main?act=mvregist">영화 등록</a>
         <footer>
             &copy;SSAFY
         </footer>
