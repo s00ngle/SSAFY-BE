@@ -103,7 +103,7 @@ footer {
 <body>
 	<div class="container">
 		<h1>영화 목록</h1>
-		<h3>등록된 영화 수 : ${cnt}</h3>
+		<h3>등록된 영화 수 : ${cnt != null ? cnt : "null"}</h3>
 		<div class="table-container">
 			<table>
 				<thead>
@@ -115,7 +115,7 @@ footer {
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${movies ne null}">
+					<c:if test="${not empty movies}">
 						<c:forEach var="movie" items="${movies}">
 							<tr>
 								<td>${movie.title}</td>
@@ -125,7 +125,7 @@ footer {
 							</tr>
 						</c:forEach>
 					</c:if>
-					<c:if test="${movies eq null}">
+					<c:if test="${empty movies}">
 						<tr>
 							<td colspan="5" style="text-align: center;">등록된 영화가 없습니다.</td>
 						</tr>
