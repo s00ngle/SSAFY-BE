@@ -17,7 +17,6 @@ public class MovieDaoImpl implements MovieDao {
     private static final String COUNT_MOVIES_SQL = "SELECT COUNT(*) FROM movies";
 
 	private static final String CREATE_TABLE_SQL = 
-			"DROP TABLE IF EXISTS movies" +
 		    "CREATE TABLE `movies` ( " +
 		    "`ID` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
 		    "`Title` varchar(40) CHARACTER SET utf8mb4 NOT NULL, " +
